@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'includes', "definitions.php"]);
+require_once joinPath(__DIR__, "GestioneCarrieraStudente.php");
+
+class AnagraficaLaureando
+{
+    public readonly string $nome;
+    public readonly string $cognome;
+    public readonly string $email;
+
+    public function __construct(int|string $matricola)
+    {
+        $rawResult = json_decode(GestioneCarrieraStudente::restituisciAnagraficaStudente($matricola));
+
+        $student = $rawResult->Entries->Entry;
+
+        $this->nome = $student->nome;
+        $this->cognome = $student->cognome;
+        $this->email = $student->email_ate;
+    }
+}
