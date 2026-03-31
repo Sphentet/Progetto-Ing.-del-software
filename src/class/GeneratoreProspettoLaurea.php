@@ -75,6 +75,9 @@ class GeneratoreProspettiLaurea
 
             if ($index === $total - 1) {
                 unlink($logFilePath);
+                if (!TEST_MODE) {
+                    unlink(joinPath($directoryPath, $cdl . "-all.pdf"));
+                }
             }
 
             return ["error" => false,
